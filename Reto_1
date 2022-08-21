@@ -1,0 +1,37 @@
+#include "DHT.h"
+#define DHTTYPE DHT11   // DHT 11
+
+//Sensor light
+#include <RBD_LightSensor.h>
+RBD::LightSensor light_sensor(A0);
+//Sensor light
+
+#define dht_dpin 4
+DHT dht(dht_dpin, DHTTYPE);
+
+
+void setup()
+{
+ Serial.begin(115200);
+ }
+
+void loop()
+{
+ float h = dht.readHumidity();
+ float t = dht.readTemperature();
+//Sensor light
+ int l =   light_sensor.getPercentValue();
+//Sensor light
+ Serial.print("Current humidity = ");
+ Serial.print(h);
+ Serial.print("%  ");
+ Serial.print("temperature = ");
+ Serial.print(t);
+ Serial.println("C  ");
+//Sensor light
+ Serial.print("light = ");
+ Serial.print(l);
+  Serial.println(" ");
+//Sensor light
+delay(2000);
+}
